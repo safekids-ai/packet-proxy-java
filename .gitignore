@@ -1,0 +1,7 @@
+**/target/**
+*.log
+*.iml
+.idea
+**/model_debug/**
+bin/win/data
+bin/sh/data
