@@ -12,16 +12,16 @@ import org.junit.jupiter.api.condition.EnabledOnOs;
 import static org.junit.jupiter.api.condition.OS.MAC;
 import ai.safekids.infra.jna.ext.mac.networkextension.NETunnelProviderManager;
 
-public class NetworkExtensionExTest extends TestCase{
+public class NETunnelProviderManagerTest extends TestCase{
 
-    public NetworkExtensionExTest( String testName )
+    public NETunnelProviderManagerTest(String testName )
     {
         super( testName );
     }
 
     public static Test suite()
     {
-        return new TestSuite( NetworkExtensionExTest.class );
+        return new TestSuite( NETunnelProviderManagerTest.class );
     }
 
     @EnabledOnOs({MAC})

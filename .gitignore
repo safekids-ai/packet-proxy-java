@@ -5,3 +5,4 @@
 **/model_debug/**
 bin/win/data
 bin/sh/data
+*.log
