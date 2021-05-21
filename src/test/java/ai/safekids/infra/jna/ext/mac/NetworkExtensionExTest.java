@@ -1,16 +1,16 @@
 package ai.safekids.infra.jna.ext.mac;
 
-import ai.safekids.app.AppTest;
+import ai.safekids.infra.jna.ext.mac.data.NSArrayRef;
+import ai.safekids.infra.jna.ext.mac.data.NSErrorRef;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import com.sun.jna.platform.mac.CoreFoundation;
+import org.rococoa.ID;
 import org.junit.Assert;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import static org.junit.jupiter.api.condition.OS.MAC;
-import ai.safekids.infra.jna.ext.mac.NetworkExtensionEx;
-import ai.safekids.infra.jna.ext.mac.data.CFErrorRef;
+import ai.safekids.infra.jna.ext.mac.networkextension.NETunnelProviderManager;
 
 public class NetworkExtensionExTest extends TestCase{
 
@@ -24,15 +24,16 @@ public class NetworkExtensionExTest extends TestCase{
         return new TestSuite( NetworkExtensionExTest.class );
     }
 
-    @EnabledOnOs({ MAC})
+    @EnabledOnOs({MAC})
     public void testLoadAllPreferences() throws Exception {
-        NetworkExtensionEx.NETunnelProviderManager.LoadAllFromPreferencesCompletionHandler completionHandler = new NetworkExtensionEx.NETunnelProviderManager.LoadAllFromPreferencesCompletionHandler() {
+        ID tunnelProvider = NetworkExtension.getClass("NETunnelProviderManager");
+        NETunnelProviderManager.LoadAllFromPreferencesCompletionHandler completionHandler = new NETunnelProviderManager.LoadAllFromPreferencesCompletionHandler() {
             @Override
-            public void invoke(CoreFoundation.CFArrayRef managers, CFErrorRef error) {
+            public void invoke(NSArrayRef managers, NSErrorRef error) {
                 Assert.assertEquals(true, true);
             }
         };
 
-        NetworkExtensionEx.NETunnelProviderManager.loadAllFromPreferencesWithCompletionHandler(completionHandler);
+        NETunnelProviderManager.loadAllFromPreferencesWithCompletionHandler(completionHandler);
     }
 }
