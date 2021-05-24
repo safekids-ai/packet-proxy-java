@@ -1,8 +1,6 @@
 package ai.safekids.infra.jna.ext.mac;
 
-import ai.safekids.infra.jna.ext.mac.data.NSArrayRef;
 import ai.safekids.infra.jna.ext.mac.data.NSErrorRef;
-import ai.safekids.infra.jna.ext.mac.networkextension.NETunnelProviderManager;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -10,7 +8,7 @@ import junit.framework.TestSuite;
 import org.junit.Assert;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import static org.junit.jupiter.api.condition.OS.MAC;
-import ai.safekids.infra.jna.ext.mac.networkextension.NEVPNManager;
+import ai.safekids.infra.jna.ext.mac.networkextension.NEVPNManagerOld;
 
 public class NEVPNManagerTest extends TestCase{
 
@@ -31,7 +29,7 @@ public class NEVPNManagerTest extends TestCase{
 
     @EnabledOnOs({MAC})
     public void testSharedManager() throws Exception {
-        NEVPNManager.sharedManager();
+        NEVPNManagerOld.sharedManager();
 
         Assert.assertTrue(true);
 
@@ -39,9 +37,10 @@ public class NEVPNManagerTest extends TestCase{
 
     @EnabledOnOs({MAC})
     public void testLoadPreferences() throws Exception {
-        NEVPNManager manager = NEVPNManager.sharedManager();
+        NEVPNManagerOld manager = NEVPNManagerOld.sharedManager();
 
-        NEVPNManager.LoadFromPreferencesCompletionHandler completionHandler = new NEVPNManager.LoadFromPreferencesCompletionHandler() {
+
+        NEVPNManagerOld.LoadFromPreferencesCompletionHandler completionHandler = new NEVPNManagerOld.LoadFromPreferencesCompletionHandler() {
             @Override
             public void invoke(NSErrorRef error) {
                 Assert.assertEquals(true, true);

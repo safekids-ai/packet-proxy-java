@@ -6,7 +6,7 @@ import com.sun.jna.Callback;
 import org.rococoa.Rococoa;
 import org.rococoa.ObjCClass;
 
-public abstract class NETunnelProviderManager extends NEVPNManager{
+public abstract class NETunnelProviderManager extends NEVPNManagerOld {
     public static final _Class CLASS = Rococoa.createClass("NETunnelProviderManager", _Class.class);
 
     public interface LoadAllFromPreferencesCompletionHandler extends Callback {
