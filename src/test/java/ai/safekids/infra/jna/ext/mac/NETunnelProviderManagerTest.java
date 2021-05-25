@@ -9,6 +9,8 @@ import org.junit.Assert;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import static org.junit.jupiter.api.condition.OS.MAC;
 import ai.safekids.infra.jna.ext.mac.networkextension.NETunnelProviderManager;
+import org.rococoa.cocoa.foundation.NSArray;
+import org.rococoa.cocoa.foundation.NSAutoreleasePool;
 
 import java.util.concurrent.TimeUnit;
 
@@ -31,14 +33,23 @@ public class NETunnelProviderManagerTest extends TestCase{
 
     @EnabledOnOs({MAC})
     public void testLoadAllPreferences() throws Exception {
+
         NETunnelProviderManager.LoadAllFromPreferencesCompletionHandler completionHandler = new NETunnelProviderManager.LoadAllFromPreferencesCompletionHandler() {
-            @Override
-            public void invoke(NSArrayRef managers, NSErrorRef error) {
+            public void callback(NSArrayRef managers, NSErrorRef error) {
                 Assert.assertEquals(true, true);
             }
         };
 
         NETunnelProviderManager.loadAllFromPreferencesWithCompletionHandler(completionHandler);
         TimeUnit.SECONDS.sleep(5);
+    }
+
+
+    @EnabledOnOs({MAC})
+    public void testCopyAppRules() throws Exception {
+        NETunnelProviderManager  manager = NETunnelProviderManager.new_();
+        NSArray rules = manager.copyAppRules();
+
+        Assert.assertNotNull(rules);
     }
 }
